@@ -5,7 +5,6 @@ from tabulate import tabulate
 
 class Parking:
      
-
 # Variaveis
 
     its_full = False

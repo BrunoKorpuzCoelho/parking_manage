@@ -4,7 +4,6 @@ import datetime
 import random
 from parking import Floor , Parking
 
-
 class Client:
 
 

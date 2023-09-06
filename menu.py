@@ -5,7 +5,6 @@ from parking import Floor
 from client import Client
 import random
 
-
 class Menu:
 
     
