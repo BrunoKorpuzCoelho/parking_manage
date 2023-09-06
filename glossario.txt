@@ -1,0 +1,9 @@
+Variaveis
+
+- avai_vehi_spots = Available vehicle spots (Class Parking)
+- motor_spots = Motorcycle spots (Class Parking)
+
+
+
+
+
