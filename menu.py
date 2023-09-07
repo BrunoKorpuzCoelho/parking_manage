@@ -8,7 +8,6 @@ import random
 class Menu:
 
     
-
     def __init__(self, clients):
         self.clients = clients
         self.parking = Parking()
@@ -335,7 +334,7 @@ class Menu:
             [1.0, "$",  "15 Min", "Normal"],
             [2.0, "$", "15 Min", "Handicap"],
             [5.0, "$", "15 Min", "VIP"],
-            [0.50, "$", "15 Min", "Bike"],
+            [0.50, "$", "15 Min", "Motorcycle"],
         ]
         header = ["Price", "Currency", "Time", "Category"]
         tabela_formatada = tabulate(dados, headers=header, tablefmt="grid")

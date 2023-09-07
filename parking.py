@@ -33,7 +33,7 @@ class Parking:
         return time
     
     def calculate_charge(self, parking_type, time_in_minutes):
-        parking_rates = {'vip': self.vip, 'handicap': self.handicap}
+        parking_rates = {"vip": self.vip, "handicap": self.handicap}
         rate = parking_rates.get(parking_type, 0)
         return (time_in_minutes / 15) * rate
     
@@ -43,7 +43,6 @@ class Parking:
 
     
 
-    
 
 
 
@@ -89,7 +88,7 @@ class Floor:
     motor_spots = 10
     handicap_spots = 2
     normal_spots = 25
-    eletric_spot = 10
+    electric_spot = 10
     floor_levels = {
         0 : "ground",
         1 : "1st",
@@ -103,12 +102,14 @@ class Floor:
 
 # Metodos
 
-    def __init__(self, vip, motor_spots, handicap, normal_spots, eletric_spot, floor):
+    def __init__(self, vip, motor_spots, handicap, normal_spots, electric_spot, floor):
         
-        self.floor = floor
+        self.vip_spots = vip
+        self.handicap_spots = handicap
         self.motor_spots = motor_spots
         self.normal_spots = normal_spots
-        self.eletric_spot = eletric_spot
+        self.electric_spot = electric_spot
+        self.floor = floor
         Floor.floors_list.append(self)
 
 # Aqui criamos um metodo para mostrar a disponibilidade por andar e por tipo de lugar dentro de cada andar
@@ -121,15 +122,15 @@ class Floor:
         print(f"Motorcycle Spots: {self.motor_spots}")
         print(f"Handicap Spots: {self.handicap_spots}")
         print(f"Spots: {self.normal_spots}")
-        print(f"Eletric car Spots: {self.eletric_spot}")
+        print(f"Eletric car Spots: {self.electric_spot}")
 
 # Aqui criamos um metodo estatico para criação de uma tabela baseada nos lugares disponiveis no nosso parque de estacionamento de forma a ser mais facil a vereficação dos mesmos
     @staticmethod
     def display_table():
-        headers = ["VIP", "BIKE", "HANDICAP", "NORMAL", "ELECTRICAL", "FLOOR"]
+        headers = ["VIP", "MOTORCYCLE", "HANDICAP", "NORMAL", "ELECTRICAL", "FLOOR"]
         data = []
         for floor in Floor.floors_list:
-            floor_data = [floor.vip_spots, floor.motor_spots, floor.handicap_spots, floor.normal_spots, floor.eletric_spot, floor.floor]
+            floor_data = [floor.vip_spots, floor.motor_spots, floor.handicap_spots, floor.normal_spots, floor.electric_spot, floor.floor]
             data.append(floor_data)
         
         table = tabulate(data, headers=headers, tablefmt="grid")

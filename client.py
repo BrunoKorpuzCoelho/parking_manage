@@ -6,7 +6,6 @@ from parking import Floor , Parking
 
 class Client:
 
-
     historical_costs = {}
 
     def __init__(self, name, id_number, brand, model, fuel, license_plate, historical_cost, client_type):
@@ -55,7 +54,7 @@ class Client:
                         model = random.choice(["Corolla", "Civic", "Focus", "Malibu", "Sentra"])
                         fuel = random.choice(["Gasoline", "Diesel", "Electric"])
                         license_plate = ''.join(random.choice('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ') for _ in range(7))
-                        client_type = random.choice(["VIP", "Handicap", "Normal", "Bike"])
+                        client_type = random.choice(["VIP", "Handicap", "Normal", "Motorcycle", "Electric"])
                         historical_cost = 0.0
                         
                         client = Client(name, id_number, brand, model, fuel, license_plate, historical_cost, client_type)
@@ -77,8 +76,8 @@ class Client:
                     license_plate = input("Enter your car license plate: ")
                     historical_cost = 0.0
                     while True:
-                        client_type = input("Enter client type (VIP/Handicap/Normal)").upper()
-                        if client_type not in ["VIP", "HANDICAP", "NORMAL", "BIKE"]:
+                        client_type = input("Enter client type (VIP/Handicap/Normal/Electric/Motorcycle)").upper()
+                        if client_type not in ["VIP", "HANDICAP", "NORMAL", "MOTORCYCLE", "ELECTRIC"]:
                             print("What you have written is invalid, please try again.")
                         else:
                             break    
@@ -168,56 +167,59 @@ class Client:
 
     @staticmethod
     def choose_parking_spot(clients, floors_list, client):
-            Floor.display_table()
-            floor_choice = int(input("Enter the floor number where you want to park: "))
+        Floor.display_table()
+        floor_choice = int(input("Enter the floor number where you want to park: "))
+
+        if 0 <= floor_choice < len(Floor.floors_list):
+            selected_floor = Floor.floors_list[floor_choice]
             
-            if 0 <= floor_choice < len(Floor.floors_list):
-                selected_floor = Floor.floors_list[floor_choice]
-                
-                spot_type = None  
-                
-                if client.client_type == "VIP" and selected_floor.vip_spots > 0:
-                    if input("Do you want to park in a VIP spot? (Y/N): ").lower() == 'y':
-                        selected_floor.vip_spots -= 1
-                        spot_type = "VIP"
-                
-                elif client.client_type == "Motorcycle" and selected_floor.motor_spots > 0:
-                    if input("Do you want to park in a Motorcycle spot? (Y/N): ").lower() == 'y':
+            spot_type = None  
+
+            
+            if client.client_type == "VIP" and selected_floor.vip_spots > 0:
+                if input("Do you want to park in a VIP spot? (Y/N): ").lower() == 'y':
+                    selected_floor.vip_spots -= 1
+                    spot_type = "VIP"
+
+            elif client.client_type == "Handicap" and selected_floor.handicap_spots > 0:
+                if input("Do you want to park in a Handicap spot? (Y/N): ").lower() == 'y':
+                    selected_floor.handicap_spots -= 1
+                    spot_type = "Handicap"
+
+            elif client.client_type == "Normal" and selected_floor.normal_spots > 0:
+                if input("Do you want to park in a Normal spot? (Y/N): ").lower() == 'y':
+                    selected_floor.normal_spots -= 1
+                    spot_type = "Normal"
+
+            elif client.client_type == "Motorcycle":
+                if input("Do you want to park in a Motorcycle spot? (Y/N): ").lower() == 'y':
+                    if selected_floor.motor_spots > 0:
                         selected_floor.motor_spots -= 1
-                        spot_type = "Motorcycle"
+                    spot_type = "Motorcycle"
                 
-                elif client.client_type == "Handicap" and selected_floor.handicap_spots > 0:
-                    if input("Do you want to park in a Handicap spot? (Y/N): ").lower() == 'y':
-                        selected_floor.handicap_spots -= 1
-                        spot_type = "Handicap"
-                
-                elif client.client_type == "Normal" and selected_floor.normal_spots > 0:
-                    if input("Do you want to park in a Normal spot? (Y/N): ").lower() == 'y':
-                        selected_floor.normal_spots -= 1
-                        spot_type = "Normal"
-                
-                elif client.client_type == "Electric" and selected_floor.eletric_spot > 0:
-                    if input("Do you want to park in an Electric spot? (Y/N): ").lower() == 'y':
-                        selected_floor.eletric_spot -= 1
-                        spot_type = "Electric"
-                
-                if spot_type:
-                    initial_charge = 0.20
-                    client.current_charge += initial_charge
-                    current_time = datetime.datetime.now()
-                    client.entry_time = current_time
-                    hours = current_time.hour
-                    minutes = current_time.minute
-                    entry_date = current_time.strftime("%d/%m/%Y")
-                    print(f"You can park at the {spot_type} spot on this floor.")
-                    print(f"Your parking time starts at: {entry_date}, {hours:02}:{minutes:02} past midnight.")
-                    return spot_type
-                
-                else:
-                    print("Sorry, no spots available of your type on this floor. Please select another floor.")
+            elif client.client_type == "Electric": 
+                if input("Do you want to park in an Electric spot? (Y/N): ").lower() == 'y':
+                    if selected_floor.electric_spot < 0:
+                        selected_floor.electric_spot -= 1
+                    spot_type = "Electric"
+            
+            if spot_type:
+                initial_charge = 0.20
+                client.current_charge += initial_charge
+                current_time = datetime.datetime.now()
+                client.entry_time = current_time
+                hours = current_time.hour
+                minutes = current_time.minute
+                entry_date = current_time.strftime("%d/%m/%Y")
+                print(f"You can park at the {spot_type} spot on this floor.")
+                print(f"Your parking time starts at: {entry_date}, {hours:02}:{minutes:02}.")
+                return spot_type
             
             else:
-                print("Invalid floor choice. Please choose again.")
+                print("Sorry, no spots available of your type on this floor. Please select another floor.")
+        
+        else:
+            print("Invalid floor choice. Please choose again.")
      
 
             
