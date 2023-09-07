@@ -6,7 +6,6 @@ from parking import Floor , Parking
 
 class Client:
 
-
     historical_costs = {}
 
     def __init__(self, name, id_number, brand, model, fuel, license_plate, historical_cost, client_type):

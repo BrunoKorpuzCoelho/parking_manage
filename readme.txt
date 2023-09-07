@@ -56,5 +56,4 @@ Classe Parking:
 
 
 
-
 # Não esquecer de criar a informação do que e cada coluna na classe floor dentro da classe parking

@@ -8,7 +8,6 @@ import random
 class Menu:
 
     
-
     def __init__(self, clients):
         self.clients = clients
         self.parking = Parking()
