@@ -12,13 +12,13 @@ class Menu:
         self.clients = clients
         self.parking = Parking()
         self.choices = {
-            'A': self.park_administration,
-            'B': self.register_client,
-            'C': self.client_list,
-            'D': lambda: self.financial_management(self.clients, datetime.datetime.now()),
-            'E': self.historical_record,
-            'F': self.price_list,
-            'G': self.leave,
+            "A": self.park_administration,
+            "B": self.register_client,
+            "C": self.client_list,
+            "D": lambda: self.financial_management(self.clients, datetime.datetime.now()),
+            "E": self.historical_record,
+            "F": self.price_list,
+            "G": self.leave,
         }
 
         
@@ -127,7 +127,7 @@ class Menu:
             user_choice = input("Enter your choice: ").upper()
             if user_choice in a_choices:
                 a_choices[user_choice]()
-                if user_choice == 'D':
+                if user_choice == "D":
                     break
             else:
                 print("Invalid option. Please choose a valid option, A, B, C, D, E.")
@@ -227,7 +227,7 @@ class Menu:
                         ]
                         print(tabulate(crypto_options, headers=["Currency", "Code", "Network", "Option"], tablefmt="grid"))
                         crypto_choice = input("Choose an option: ")
-                        if crypto_choice in ['a', 'b', 'c']:
+                        if crypto_choice in ["a", "b", "c"]:
                             trans_num = input("Enter your transfer number: ")
                             print("Thank you!")
 
@@ -313,7 +313,7 @@ class Menu:
             user_choice = input("Enter your choice: ").upper()
             if user_choice in a_choices:
                 a_choices[user_choice]()
-                if user_choice == 'D':
+                if user_choice == "D":
                     break
             else:
                 print("Invalid option. Please choose a valid option, A, B, C, D.")
