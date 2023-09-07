@@ -53,7 +53,7 @@ class Client:
                         brand = random.choice(["Toyota", "Honda", "Ford", "Chevrolet", "Nissan"])
                         model = random.choice(["Corolla", "Civic", "Focus", "Malibu", "Sentra"])
                         fuel = random.choice(["Gasoline", "Diesel", "Electric"])
-                        license_plate = ''.join(random.choice('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ') for _ in range(7))
+                        license_plate = "".join(random.choice("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ") for _ in range(7))
                         client_type = random.choice(["VIP", "Handicap", "Normal", "Motorcycle", "Electric"])
                         historical_cost = 0.0
                         
@@ -159,7 +159,7 @@ class Client:
             user_choice = input("Enter your choice: ").upper()
             if user_choice in a_choices:
                 a_choices[user_choice]()
-                if user_choice == 'D':
+                if user_choice == "D":
                     break
             else:
                 print("Invalid option. Please choose a valid option, A, B, C, D.")  
@@ -177,28 +177,28 @@ class Client:
 
             
             if client.client_type == "VIP" and selected_floor.vip_spots > 0:
-                if input("Do you want to park in a VIP spot? (Y/N): ").lower() == 'y':
+                if input("Do you want to park in a VIP spot? (Y/N): ").lower() == "y":
                     selected_floor.vip_spots -= 1
                     spot_type = "VIP"
 
             elif client.client_type == "Handicap" and selected_floor.handicap_spots > 0:
-                if input("Do you want to park in a Handicap spot? (Y/N): ").lower() == 'y':
+                if input("Do you want to park in a Handicap spot? (Y/N): ").lower() == "y":
                     selected_floor.handicap_spots -= 1
                     spot_type = "Handicap"
 
             elif client.client_type == "Normal" and selected_floor.normal_spots > 0:
-                if input("Do you want to park in a Normal spot? (Y/N): ").lower() == 'y':
+                if input("Do you want to park in a Normal spot? (Y/N): ").lower() == "y":
                     selected_floor.normal_spots -= 1
                     spot_type = "Normal"
 
             elif client.client_type == "Motorcycle":
-                if input("Do you want to park in a Motorcycle spot? (Y/N): ").lower() == 'y':
+                if input("Do you want to park in a Motorcycle spot? (Y/N): ").lower() == "y":
                     if selected_floor.motor_spots > 0:
                         selected_floor.motor_spots -= 1
                     spot_type = "Motorcycle"
                 
             elif client.client_type == "Electric": 
-                if input("Do you want to park in an Electric spot? (Y/N): ").lower() == 'y':
+                if input("Do you want to park in an Electric spot? (Y/N): ").lower() == "y":
                     if selected_floor.electric_spot < 0:
                         selected_floor.electric_spot -= 1
                     spot_type = "Electric"
